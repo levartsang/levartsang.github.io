@@ -162,7 +162,7 @@
             var unicour_data = $.csv.toArrays(csv)
             $("#unicour-sum").text(unicour_data.length - 1)
             for (let index = 1; index < unicour_data.length; index++) {
-              console.log(ele)
+              const ele = unicour_data[index];
               $("#unicour").append('<tr>'
                   + '<td class="unicour_id" data-toggle="tooltip" data-placement="bottom" title="'+ ele[0] + '">' + ele[0] + '</td>'
                   + '<td class="unicour_cour" data-toggle="tooltip" data-placement="bottom" title="' + ele[1] + '"><a href="' + ele[5] + '">' + ele[1] + '</a></td>'
