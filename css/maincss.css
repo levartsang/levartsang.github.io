@@ -1,0 +1,27 @@
+td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/*大学课程显示样式*/
+.unicour_id{
+    max-width: 8rem;
+}
+.unicour_cour{
+    max-width: 10rem;
+}
+.unicour_tec{
+    max-width: 7rem;
+}
+.unicour_major{
+    max-width: 8rem;
+}
+.unicour_plat{
+    max-width: 7rem;
+}
+.unicour_comm{
+    max-width: 8rem;
+}
+.unicour_date{
+    max-width: 7rem;
+}
