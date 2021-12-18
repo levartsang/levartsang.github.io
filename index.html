@@ -55,6 +55,7 @@
                 <hr class="my-4">
                 <p>原则上和原文档同源，并不会对原文档进行修改，如有侵权，联系删除</p>
               </div>
+              <button onclick="testcomm()">test comm</button>
             </div>
             <div class="tab-pane fade" id="list-unicour" role="tabpanel" aria-labelledby="list-unicour-list">
               <div class="card">
@@ -153,6 +154,14 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script>
+      function testcomm() {
+        $.get({
+          url:'https://github.com/levartsang/levartsang.github.io/issues/1',
+          success:function(data){
+            console.log(data)
+          }
+        })
+      }
       $(function(){
         $('[data-toggle="tooltip"]').tooltip('show')
         // 导入大学课程数据
