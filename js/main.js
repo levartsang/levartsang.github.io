@@ -152,6 +152,7 @@ $(function(){
     }
 
     function initNotice(path) {
+        $(noticeID).text('正在加载公告...')
         $.get({
             url:path,
             success:function(r_data){
@@ -164,4 +165,16 @@ $(function(){
             }
         })
     }
+
+    // gitalk
+    const gitalk = new Gitalk({
+        clientID: '04c2dd790817eed71f92',
+        clientSecret: 'e2bac1804a381c9504baf7e78acffea9cf720ff7',
+        repo: 'https://github.com/levartsang/levartsang.github.io',      // The repository of store comments,
+        owner: 'levartsang',
+        admin: ['levartsang'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+      gitalk.render('gitalk-container')
 })
