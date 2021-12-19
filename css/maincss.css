@@ -3,6 +3,9 @@ td {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+i {
+    margin-right: 1rem;
+}
 /*大学课程显示样式*/
 .unicour_id{
     max-width: 6rem;
