@@ -6,6 +6,9 @@ td {
 .iconfont {
     margin-right: 1rem;
 }
+.badge-light {
+    margin-left: 0.3rem;
+}
 /*大学课程显示样式*/
 .unicour_id{
     max-width: 6rem;
