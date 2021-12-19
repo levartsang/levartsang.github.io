@@ -177,4 +177,5 @@ $(function(){
         distractionFreeMode: false  // Facebook-like distraction free mode
       })
       gitalk.render('gitalk-container')
+      $("#messboard-sum").text($(".gt-link-counts").text())
 })
