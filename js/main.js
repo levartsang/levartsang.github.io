@@ -177,5 +177,10 @@ $(function(){
         distractionFreeMode: false  // Facebook-like distraction free mode
       })
       gitalk.render('gitalk-container')
-      $("#messboard-sum").text($(".gt-link-counts").text())
+      $.get({
+          url:'https://api.github.com/repos/levartsang/levartsang.github.io/issues',
+          success:function(resp) {
+            $("#messboard-sum").text(resp[0].comments)
+          }
+      })
 })
