@@ -5,7 +5,7 @@ td {
 }
 /*大学课程显示样式*/
 .unicour_id{
-    max-width: 8rem;
+    max-width: 6rem;
 }
 .unicour_cour{
     max-width: 10rem;
@@ -24,4 +24,13 @@ td {
 }
 .unicour_date{
     max-width: 7rem;
+}
+
+@media screen and (max-width:992px) {
+    .row {
+        display: block;
+    }
+    .unicour_id, .unicour_cour, .unicour_tec, .unicour_major, .unicour_plat, .unicour_comm, .unicour_date{
+        max-width: 1rem;
+    }
 }
