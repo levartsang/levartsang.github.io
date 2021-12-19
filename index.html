@@ -29,7 +29,7 @@
                    公告
                  </div>
                  <div class="card-body">
-                   <p class="card-text">...这只是一个简单的web端，没有检索功能，如果需要，请使用Ctrl+F的简单检索功能。为什么其他没有数据？没导入...</p>
+                   <p class="card-text" id="notice"></p>
                  </div>
                </div>
               </div>
@@ -39,10 +39,11 @@
                 <nav class="collapse border rounded" id="left-menu">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#list-home" role="tab" aria-controls="v-pills-home" aria-selected="true">开始页</a>
-                    <a class="nav-link" id="v-pills-unicour-tab" data-toggle="pill" href="#list-unicour" role="tab" aria-controls="v-pills-profile" aria-selected="false">大学课程<span class="badge badge-light" id="unicour-sum">0</span></a>
-                    <a class="nav-link" id="v-pills-othcour-tab" data-toggle="pill" href="#list-othcour" role="tab" aria-controls="v-pills-messages" aria-selected="false">其他课程<span class="badge badge-light">0</span></a>
-                    <a class="nav-link" id="v-pills-panknowup-tab" data-toggle="pill" href="#list-panknowup" role="tab" aria-controls="v-pills-settings" aria-selected="false">泛知识UP<span class="badge badge-light">0</span></a>
-                    <a class="nav-link" id="v-pills-books-tab" data-toggle="pill" href="##list-books" role="tab" aria-controls="v-pills-settings" aria-selected="false">书籍推荐<span class="badge badge-light">0</span></a>
+                    <a class="nav-link" id="v-pills-unicour-tab" data-toggle="pill" href="#list-unicour" role="tab" aria-controls="v-pills-unicour" aria-selected="false">大学课程<span class="badge badge-light" id="unicour-sum">0</span></a>
+                    <a class="nav-link" id="v-pills-othcour-tab" data-toggle="pill" href="#list-othcour" role="tab" aria-controls="v-pills-othcour" aria-selected="false">其他课程<span class="badge badge-light" id="othcour-sum">0</span></a>
+                    <a class="nav-link" id="v-pills-panknowup-tab" data-toggle="pill" href="#list-panknowup" role="tab" aria-controls="v-pills-panknowup" aria-selected="false">泛知识UP<span class="badge badge-light" id="panknowup-sum">0</span></a>
+                    <a class="nav-link" id="v-pills-books-tab" data-toggle="pill" href="#list-books" role="tab" aria-controls="v-pills-books" aria-selected="false">书籍推荐<span class="badge badge-light" id="books-sum">0</span></a>
+                    <a class="nav-link" id="v-pills-messboard-tab" data-toggle="pill" href="#list-messboard" role="tab" aria-controls="v-pills-messboard" aria-selected="false">留言板<span class="badge badge-light" id="messboard-sum">0</span></a>
                   </div>
                 </nav>
               </div>
@@ -58,9 +59,8 @@
                 <h4 class="display-4">版权声明</h4>
                 <p class="lead">该文档搬运B站UP主<a href="https://space.bilibili.com/774729/">_碳十二_</a>维护的全网优质课程知识库文档</p>
                 <hr class="my-4">
-                <p>原则上和原文档同源，并不会对原文档进行修改，如有侵权，联系删除</p>
+                <p>原则上和原文档同源，并不会对原文档进行修改，如有侵权，请联系<a href="mailto:levartsang@outlook.com">levartsang@outlook.com</a> 删除</p>
               </div>
-              
             </div>
             <div class="tab-pane fade" id="list-unicour" role="tabpanel" aria-labelledby="list-unicour-list">
               <div class="card">
@@ -87,7 +87,6 @@
             <div class="tab-pane fade" id="list-othcour" role="tabpanel" aria-labelledby="list-othcour-list">
               <div class="card">
                 <div class="card-body">
-                 
                   <table class="table table-hover">
                     <thead class="thead-light">
                       <tr>
@@ -99,7 +98,7 @@
                         <th scope="col">推荐日期</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="othcour">
                     </tbody>
                   </table>
                 </div>
@@ -120,10 +119,7 @@
                         <th scope="col">推荐日期</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                      
-                      </tr>
+                    <tbody id="panknowup">
                     </tbody>
                   </table>
                 </div>
@@ -132,7 +128,6 @@
             <div class="tab-pane fade" id="list-books" role="tabpanel" aria-labelledby="list-books-list">
               <div class="card">
                 <div class="card-body">
-                  
                   <table class="table table-hover">
                     <thead class="thead-light">
                       <tr>
@@ -143,9 +138,16 @@
                         <th scope="col">推荐日期</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="books">
                     </tbody>
                   </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="list-messboard" role="tabpanel" aria-labelledby="list-messboard-list">
+              <div class="card">
+                <div class="card-body">
+                  留言板施工中...
                 </div>
               </div>
             </div>
@@ -158,43 +160,6 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script>
-      $(function(){
-        $('[data-toggle="tooltip"]').tooltip('show')
-        if($(this).width() >= 972) {
-            $("#left-menu").addClass("show")
-        } else {
-          $("#left-menu").removeClass("show")
-        }
-        $(window).resize(function(){
-          if($(this).width() >= 972) {
-            $("#left-menu").addClass("show")
-          } else {
-          $("#left-menu").removeClass("show")
-        }
-        })
-        // 导入大学课程数据
-        $.get({
-          url:"data/unicour_data.csv",
-          success:function(csv) {
-            var unicour_data = $.csv.toArrays(csv)
-            $("#unicour-sum").text(unicour_data.length - 1)
-            for (let index = 1; index < unicour_data.length; index++) {
-              const ele = unicour_data[index];
-              $("#unicour").append('<tr>'
-                  + '<td class="unicour_id" data-toggle="tooltip" data-placement="bottom" title="'+ ele[0] + '">' + ele[0] + '</td>'
-                  + '<td class="unicour_cour" data-toggle="tooltip" data-placement="bottom" title="' + ele[1] + '"><a href="' + ele[5] + '">' + ele[1] + '</a></td>'
-                  + '<td class="unicour_tec" data-toggle="tooltip" data-placement="bottom" title="'+ ele[2] + '">' + ele[2] + '</td>'
-                  + '<td class="unicour_major" data-toggle="tooltip" data-placement="bottom" title="'+ ele[3] + '">' + ele[3] + '</td>'
-                  + '<td class="unicour_plat" data-toggle="tooltip" data-placement="bottom" title="'+ ele[4] + '">' + ele[4] + '</td>'
-                  + '<td class="unicour_comm" data-toggle="tooltip" data-placement="bottom" title="'+ ele[6] + '">' + ele[6] + '</td>'
-                  + '<td class="unicour_date" data-toggle="tooltip" data-placement="bottom" title="'+ ele[8] + '">' + ele[8] + '</td>'
-                  + '</tr>')
-            }
-          }
-          //
-        })
-      })
-    </script>
+    <script src="/js/main.js"></script>
   </body>
 </html>
