@@ -3,32 +3,34 @@ td {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 .iconfont {
     margin-right: 1rem;
 }
+
 .badge-light {
     margin-left: 0.3rem;
 }
-/*大学课程显示样式*/
-.unicour_id{
+
+.id{
     max-width: 6rem;
 }
-.unicour_cour{
+.cour{
     max-width: 10rem;
 }
-.unicour_tec{
+.tec{
     max-width: 7rem;
 }
-.unicour_major{
+.major{
     max-width: 8rem;
 }
-.unicour_plat{
+.plat{
     max-width: 8rem;
 }
-.unicour_comm{
+.comm{
     max-width: 8rem;
 }
-.unicour_date{
+.date{
     max-width: 7rem;
 }
 
@@ -36,7 +38,7 @@ td {
     .row {
         display: block;
     }
-    .unicour_id, .unicour_cour, .unicour_tec, .unicour_major, .unicour_plat, .unicour_comm, .unicour_date{
+    .id, .cour, .tec, .major, .plat, .comm, .date{
         max-width: 1rem;
     }
 }
