@@ -10,37 +10,37 @@ $(function(){
     // 需要初始化页面的参数
     items = [
         {
-            curr:0,
             url:"data/unicour_data.csv",
             id:"#unicour",
             data:[],
+            searchData:[],
             curr_page:1,
             isInit:false,
             callback: initUnicour
         },
         {
-            curr:1,
             url:"data/othcour_data.csv",
             id:"#othcour",
             data:[],
+            searchData:[],
             curr_page:1,
             isInit:false,
             callback: initOthcour
         },
         {
-            curr:2,
             url:"data/panknowup_data.csv",
             id:"#panknowup",
             data:[],
+            searchData:[],
             isInit:false,
             curr_page:1,
             callback: initPanknowup
         },
         {
-            curr:3,
             url:"data/books_data.csv",
             id:"#books",
             data:[],
+            searchData:[],
             isInit:false,
             curr_page:1,
             callback: initBooks
@@ -64,9 +64,10 @@ $(function(){
     $('a.nav-link').click(function() {
         var curr_item = items[$('a.nav-link').index(this) - 1]
         if (!curr_item.isInit) {
+            curr_item.isInit = true
+            curr_item.searchData = curr_item.data
             initPaging(curr_item)
             initPageData(curr_item)
-            curr_item.isInit = true
         }
     })
 
@@ -89,7 +90,7 @@ $(function(){
         }
         if ($(this).attr('aria-label') == 'Next') {
             curr_item.curr_page = parseInt($($(this).parent().siblings()[3]).children('a').attr('page')) + 1
-            if (curr_item.curr_page <= Math.ceil(curr_item.data.length / pageDataSum)) {
+            if (curr_item.curr_page <= Math.ceil(curr_item.searchData.length / pageDataSum)) {
                 for (let s = 1 ; s < [$(this).parent().siblings()][0].length && s <= 3; s++) {
                     const sibling = [$(this).parent().siblings()][0][s];
                     $(sibling).children('a').attr('page', parseInt($(sibling).children('a').attr('page')) + 1)
@@ -170,9 +171,9 @@ $(function(){
      */
     function initPageData(item) {
         var cp = item.curr_page
-        var data = item.data
+        var data = item.searchData
         // 一次只加载8条数据
-        for (let index = (cp - 1) * pageDataSum + 1; index < data.length && index <= cp * pageDataSum; index++) { // 为什么从第二个数据开始？csv第一行是表头
+        for (let index = (cp - 1) * pageDataSum ; index < data.length && index <= cp * pageDataSum; index++) { // 为什么从第二个数据开始？csv第一行是表头
             const curr_row_data = data[index];
             item.callback(curr_row_data)
         }
@@ -182,8 +183,9 @@ $(function(){
 
     function initPaging(item) {
         var s = item.curr_page
-        var e = item.data.length / item.curr_page
-        for (let index = s; index <= 3 && index <= e; index++){
+        var e = Math.ceil(item.searchData.length / pageDataSum)
+        console.log(s, e)
+        for (let index = s; index <= e && index <= 3; index++){
             $(item.id + '-paging li:last-child').before('<li class="page-item"><a class="page-link"'
                 + 'page="' + index + '">'
                 + index + '</a></li>')
@@ -259,4 +261,31 @@ $(function(){
             $("#messboard-sum").text(resp[0].comments)
           }
       })
+
+    //------------------------------------------------------------
+    $('button').click(function(){
+        var id = $(this).attr('id')
+        id = id.substr(0, id.indexOf('-'))
+        var key = $('#' + id + '-key option:selected').val()
+        var filter = $('#' + id + '-filter').val()
+        $(unicourID + ' tr').remove()
+        items[0].searchData = search(items[0].data, key, filter)
+        items[0].curr_page = 1
+        initPageData(items[0])
+        
+    })
+    function initFilter(filter) {
+        return  new RegExp('.*' + filter + '.*')
+    }
+    //搜索功能dome
+    function search(source, key, filter) {
+        filter = initFilter(filter)
+        var searchRs = new Array()
+        source.forEach((rowData)=>{
+            if(rowData[key].search(filter) == 0) {
+                searchRs.push(rowData)
+            }
+        })
+        return searchRs
+    }
 })

@@ -13,13 +13,13 @@ td {
 }
 
 .id{
-    max-width: 6rem;
+    max-width: 4rem;
 }
 .cour{
-    max-width: 10rem;
+    max-width: 8rem;
 }
 .tec{
-    max-width: 7rem;
+    max-width: 4rem;
 }
 .major{
     max-width: 8rem;
@@ -28,10 +28,10 @@ td {
     max-width: 8rem;
 }
 .comm{
-    max-width: 8rem;
+    max-width: 5rem;
 }
 .date{
-    max-width: 7rem;
+    max-width: 4rem;
 }
 
 @media screen and (max-width:992px) {
