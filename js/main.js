@@ -1,51 +1,72 @@
 $(function(){
-    // 参数设置
+    // 参数配置
+    // 可以手动修改
+    //==================页面数据表格id=======================
+    //一般不需要更改
     const unicourID = "#unicour"
     const othcourID = "#othcour"
     const panknowupID = "#panknowup"
     const booksID = "#books"
     const noticeID = "#notice"
+    //==================页面数据源，结构是固定的================
+    //直接用word打开编辑
+    const unicourDataPath = "data/unicour_data.csv"
+    const othcourDataPath = "data/othcour_data.csv"
+    const panknowDataPath = "data/panknowup_data.csv"
+    const booksDataPath = "data/books_data.csv"
     const noticePath = "data/notice_data.dat"
-    const pageDataSum = 8
+
+    const pageDataSum = 8   // 默认一页显示几条数据
+     //==================更改下面逻辑代码有一定风险=============
+    // don't modify
+    // 下面逻辑代码一般不需要更改
+    //=======================================================
     // 需要初始化页面的参数
     items = [
         {
-            url:"data/unicour_data.csv",
-            id:"#unicour",
+            url:unicourDataPath,
+            id:unicourID,
             data:[],
             searchData:[],
-            curr_page:1,
             isInit:false,
+            curr_page:0,
+            step:1,
             callback: initUnicour
         },
         {
-            url:"data/othcour_data.csv",
-            id:"#othcour",
+            url:othcourDataPath,
+            id:othcourID,
             data:[],
             searchData:[],
-            curr_page:1,
             isInit:false,
+            curr_page:0,
+            step:1,
             callback: initOthcour
         },
         {
-            url:"data/panknowup_data.csv",
-            id:"#panknowup",
+            url:panknowDataPath,
+            id:panknowupID,
             data:[],
             searchData:[],
             isInit:false,
-            curr_page:1,
+            curr_page:0,
+            step:1,
             callback: initPanknowup
         },
         {
-            url:"data/books_data.csv",
-            id:"#books",
+            url:booksDataPath,
+            id:booksID,
             data:[],
             searchData:[],
             isInit:false,
-            curr_page:1,
+            curr_page:0,
+            step:1,
             callback: initBooks
         }
     ]
+
+     // 公告
+     initNotice(noticePath)
 
     // 获取页面初始化数据
     items.forEach(ele => {
@@ -53,9 +74,6 @@ $(function(){
         $(ele.id + '-sum').text(ele.data.length)
     });
     
-    // 公告
-    initNotice(noticePath)
-
     // 左侧菜单动态设置
     initLeftMeun();
 
@@ -64,41 +82,62 @@ $(function(){
     $('a.nav-link').click(function() {
         var curr_item = items[$('a.nav-link').index(this) - 1]
         if (!curr_item.isInit) {
-            curr_item.isInit = true
-            curr_item.searchData = curr_item.data
-            initPaging(curr_item)
+            curr_item.searchData = search(curr_item.data, 0, '') // 去掉表头数据
+            if (curr_item.searchData.length > 0) {
+                curr_item.curr_page = 1
+            }
             initPageData(curr_item)
+            initPaging(curr_item)
+            curr_item.isInit = true
         }
     })
 
     // 分页点击数据加载
     $('.pagination').on('click', '.page-link', function() {
         var curr_item = items[$(this).parent().parent().attr('item')]
-        $(curr_item.id + ' tr').remove()
-        curr_item.curr_page = $(this).attr('page')
+        $(curr_item.id + ' tr').remove()    // 先清除页面数据
+        // 点击上一页时，向前加载两页
         if ($(this).attr('aria-label') == 'Previous') {
-            curr_item.curr_page = parseInt($($(this).parent().siblings()[0]).children('a').attr('page')) - 1
-                if (curr_item.curr_page > 0) {
-                    for (let s = 0 ; s < [$(this).parent().siblings()][0].length && s < 3; s++) {
-                        const sibling = [$(this).parent().siblings()][0][s];
-                        $(sibling).children('a').attr('page', parseInt($(sibling).children('a').attr('page')) - 1)
-                        $(sibling).children('a').text(parseInt($(sibling).children('a').text()) - 1)
-                    }
-                } else {
-                    curr_item.curr_page = $($(this).parent().siblings()[0]).children('a').attr('page')
+            if ((parseInt($(this).parent().next().children('a').attr('page')) - 2) > 0) {
+                curr_item.curr_page = parseInt($(this).parent().next().children('a').attr('page')) - 2
+                for (let s = 0 ; s < [$(this).parent().siblings()][0].length && s < 3; s++) {
+                    const sibling = [$(this).parent().siblings()][0][s];
+                    $(sibling).children('a').attr('page', parseInt($(sibling).children('a').attr('page')) - 2)
+                    $(sibling).children('a').text(parseInt($(sibling).children('a').text()) - 2)
                 }
+                // 说明还有上一页
+                $(this).parent().siblings().find('[page="'+(curr_item.curr_page + 1)+'"]').parent().addClass('active')
+                $(this).parent().siblings().children('a').not('[page="'+(curr_item.curr_page + 1)+'"]').parent().removeClass('active')
+            } else {
+                // 无上一页，当前页就是当前页
+                $(this).parent().siblings().find('[page="'+(curr_item.curr_page)+'"]').parent().addClass('active')
+                $(this).parent().siblings().children('a').not('[page="'+(curr_item.curr_page)+'"]').parent().removeClass('active')
+            }
+            
         }
-        if ($(this).attr('aria-label') == 'Next') {
-            curr_item.curr_page = parseInt($($(this).parent().siblings()[3]).children('a').attr('page')) + 1
-            if (curr_item.curr_page <= Math.ceil(curr_item.searchData.length / pageDataSum)) {
+        // 点击下一页时，向后加载两页
+        else if ($(this).attr('aria-label') == 'Next') {
+            if ((parseInt($(this).parent().prev().children('a').attr('page')) + 2) 
+                    <= Math.ceil(curr_item.searchData.length / pageDataSum)) {
+                curr_item.curr_page = parseInt($(this).parent().prev().children('a').attr('page')) + 2
                 for (let s = 1 ; s < [$(this).parent().siblings()][0].length && s <= 3; s++) {
                     const sibling = [$(this).parent().siblings()][0][s];
-                    $(sibling).children('a').attr('page', parseInt($(sibling).children('a').attr('page')) + 1)
-                    $(sibling).children('a').text(parseInt($(sibling).children('a').text()) + 1)
+                    $(sibling).children('a').attr('page', parseInt($(sibling).children('a').attr('page')) + 2)
+                    $(sibling).children('a').text(parseInt($(sibling).children('a').text()) + 2)
                 }
+                // 说明还有下一页
+                $(this).parent().siblings().find('[page="'+(curr_item.curr_page - 1)+'"]').parent().addClass('active')
+                $(this).parent().siblings().children('a').not('[page="'+(curr_item.curr_page - 1)+'"]').parent().removeClass('active')
             } else {
-                curr_item.curr_page = parseInt($($(this).parent().siblings()[3]).children('a').attr('page'))
+                curr_item.curr_page = parseInt($(this).parent().prev().children('a').attr('page'))
+                // 无上一页，当前页就是当前页
+                $(this).parent().siblings().find('[page="'+(curr_item.curr_page)+'"]').parent().addClass('active')
+                $(this).parent().siblings().children('a').not('[page="'+(curr_item.curr_page)+'"]').parent().removeClass('active')
             }
+        } else {
+            curr_item.curr_page = $(this).attr('page')
+            $(this).parent().addClass('active') // 为当前点击元素添加背景颜色
+            $(this).parent().siblings().removeClass('active')
         }
         initPageData(curr_item)
     })
@@ -170,26 +209,29 @@ $(function(){
      * @param {String} sumID
      */
     function initPageData(item) {
-        var cp = item.curr_page
+        var cp = item.curr_page <= 0 ? 1: item.curr_page
+        var index =  (cp - 1) * pageDataSum
+        var flag = index
         var data = item.searchData
         // 一次只加载8条数据
-        for (let index = (cp - 1) * pageDataSum ; index < data.length && index <= cp * pageDataSum; index++) { // 为什么从第二个数据开始？csv第一行是表头
+        for (; index < data.length && index < cp * pageDataSum; index++) { // 为什么从第二个数据开始？csv第一行是表头
             const curr_row_data = data[index];
             item.callback(curr_row_data)
         }
-        item.curr_page++; // 页数+1
-        $('[data-toggle="tooltip"]').tooltip()
+        if (index != flag) {
+            $('[data-toggle="tooltip"]').tooltip()
+        }
     }
 
     function initPaging(item) {
         var s = item.curr_page
-        var e = Math.ceil(item.searchData.length / pageDataSum)
-        console.log(s, e)
-        for (let index = s; index <= e && index <= 3; index++){
+        var e = Math.ceil(item.searchData.length / pageDataSum)        
+        for (let index = s; index <= e && index <= 3; index++) {
             $(item.id + '-paging li:last-child').before('<li class="page-item"><a class="page-link"'
                 + 'page="' + index + '">'
                 + index + '</a></li>')
         }
+        $(item.id + '-paging .page-item').find('a[page="' + item.curr_page + '"]').parent().addClass('active')
     }
 
     /**
@@ -235,11 +277,11 @@ $(function(){
             url:path,
             success:function(r_data){
                 console.log("获取公告" + path + "成功")
-                $(noticeID).text(r_data)
+                $(noticeID).html(r_data)    // 用这个方便写标签格式化数据
             },
             error:function() {
                 console.log("获取公告" + path + "失败")
-                $(noticeID).text('...(*￣０￣)ノ[这家伙很懒，什么都没留下...]');
+                $(noticeID).html('...(*￣０￣)ノ[这家伙很懒，什么都没留下...]');
             }
         })
     }
@@ -265,14 +307,28 @@ $(function(){
     //------------------------------------------------------------
     $('button').click(function(){
         var id = $(this).attr('id')
-        id = id.substr(0, id.indexOf('-'))
-        var key = $('#' + id + '-key option:selected').val()
-        var filter = $('#' + id + '-filter').val()
-        $(unicourID + ' tr').remove()
-        items[0].searchData = search(items[0].data, key, filter)
-        items[0].curr_page = 1
-        initPageData(items[0])
-        
+        id = '#' + id.substr(0, id.indexOf('-'))
+        var item = (()=>{
+            var curr
+            items.forEach(ele=>{
+                if (ele.id == id) {
+                   curr = ele
+                   return false // break
+                }
+            })
+            return curr
+        })();
+        console.log(item)
+        var key = $(id + '-key option:selected').val()
+        var filter = $(id + '-filter').val()
+        // 清除页面数据
+        $(id + ' tr').remove()
+        $(item.id + '-paging>li').not(':first').not(':last').remove()
+        item.searchData = search(item.data, key, filter)  // 构造搜索数据
+         if (item.searchData.length > 0) items.curr_page = 1
+         else item.curr_page = 0
+        initPageData(item)
+        initPaging(item)
     })
     function initFilter(filter) {
         return  new RegExp('.*' + filter + '.*')
@@ -281,11 +337,13 @@ $(function(){
     function search(source, key, filter) {
         filter = initFilter(filter)
         var searchRs = new Array()
-        source.forEach((rowData)=>{
+        for (let index = 1; index < source.length; index++) { // 从第二条开始过滤，第一条是表头
+            const rowData = source[index]
             if(rowData[key].search(filter) == 0) {
                 searchRs.push(rowData)
             }
-        })
+
+        }
         return searchRs
     }
 })

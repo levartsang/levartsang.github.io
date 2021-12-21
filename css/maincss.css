@@ -42,3 +42,8 @@ td {
         max-width: 1rem;
     }
 }
+
+#notice {
+    text-indent: 2rem;
+    font-size: 15px;
+}
