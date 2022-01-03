@@ -13,6 +13,8 @@
     const startPageID = "#startPgae"
     const aboutPageID = "#aboutPage"
     const commPageID = "#commPage"
+    const searchButtID = "#search"
+    const filterID = "#filter"
     //==================页面数据源，结构是固定的================
     //直接用word打开编辑
     const unicourDataPath = "data/unicour_data.csv"
@@ -107,6 +109,39 @@
         }
     ]
 
+    $(searchButtID).click(function() {
+        const key = 1
+        const filter = $(filterID).val()
+        const index = $('a.nav-link').index($('a.nav-link.active'))
+        if (unicourPage <= index && index <= booksPage) {
+            // 只有在对应页面上才能搜索
+            const item = leftMeunItems[index]
+            item.searchData = search(item.data, key, filter)
+            $('#bd-show-data div').remove()
+            $('#curr-page').text(item.curr_page)
+            $('.sum-data').text('共' + Math.ceil(item.searchData.length / pageDataSum)+ '页')
+            createPageData(item)
+        } else {
+            $(filterID).val('去对应页面搜索吧')
+        }
+    });
+    
+    // 双击card时跳转，如果有链接时
+    $(showDataContainerID).on('dblclick', '.card' , function() {
+        this.querySelector('a').click()
+    });
+
+    // 单击徽章
+    $(showDataContainerID).on('click', '.card .badge' , function() {
+        const key = $(this).attr('key')
+        const filter = $(this).text()
+        const item = leftMeunItems[$('a.nav-link').index($('a.nav-link.active'))]
+        item.searchData = search(item.data, key, filter)
+        $('#bd-show-data div').remove()
+        $('#curr-page').text(item.curr_page)
+        $('.sum-data').text('共' + Math.ceil(item.searchData.length / pageDataSum)+ '页')
+        createPageData(item)
+    });
     initLeftMeun()
 
     // 初始化数据
@@ -146,8 +181,8 @@
 
     // 左侧菜单点击时构造页面数据
     $('a.nav-link').click(function() {
-        var index = $('a.nav-link').index(this)
-        var item = leftMeunItems[index]
+        const index = $('a.nav-link').index(this)
+        const item = leftMeunItems[index]
         $(this).addClass('active')
         $(this).siblings().removeClass('active')
         $('#bd-show-data div').remove()
@@ -304,8 +339,8 @@
      * @param {Array<String>} row
      */
      function initUnicour(row) {
-        $(showDataContainerID).append('<a href="'+ row[5]  +'">' 
-            + '<div class="card mb-3 shadow rounded">'
+        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
+            + '<a href="'+ row[5]  +'"></a>'
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage(row[5]) + '" class="card-img" alt="图片来源网络，侵删除">'
@@ -323,7 +358,7 @@
             + '</div>'
             + '</div>'
             + '</div>'
-            + '</div></a>')
+            + '</div>')
         $('[data-toggle="tooltip"]').tooltip()
     }
 
@@ -332,8 +367,8 @@
      * @param {Array<String>} row
      */
     function initOthcour(row) {
-        $(showDataContainerID).append('<a href="'+ row[5]  +'">' 
-            + '<div class="card mb-3 shadow rounded">'
+        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
+            + '<a href="'+ row[5]  +'"></a>' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
@@ -351,7 +386,7 @@
             + '</div>'
             + '</div>'
             + '</div>'
-            + '</div></a>')
+            + '</div>')
         $('[data-toggle="tooltip"]').tooltip()
     }
 
@@ -360,8 +395,8 @@
      * @param {Array<String>} row
      */
      function initPanknowup(row) {
-        $(showDataContainerID).append('<a href="'+ row[4]  +'">' 
-            + '<div class="card mb-3 shadow rounded">'
+        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
+            + '<a href="'+ row[4]  +'"></a>' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
@@ -379,7 +414,7 @@
             + '</div>'
             + '</div>'
             + '</div>'
-            + '</div></a>')
+            + '</div>')
         $('[data-toggle="tooltip"]').tooltip()
     }
 
@@ -388,8 +423,8 @@
      * @param {Array<String>} row
      */
      function initBooks(row) {
-        $(showDataContainerID).append('<a href="'+ '#'  +'">' 
-            + '<div class="card mb-3 shadow rounded">'
+        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
+            + '<a href="'+ '#'  +'"></a>' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
@@ -405,7 +440,7 @@
             + '</div>'
             + '</div>'
             + '</div>'
-            + '</div></a>')
+            + '</div>')
         $('[data-toggle="tooltip"]').tooltip()
     }
 
@@ -440,7 +475,7 @@
         var searchRs = new Array()
         for (let index = 1; index < source.length; index++) { // 从第二条开始过滤，第一条是表头
             const rowData = source[index]
-            if(rowData[key].search(filter) == 0) {
+            if(rowData[key] != undefined && rowData[key] != '' && rowData[key].search(filter) == 0) {
                 searchRs.push(rowData)
             }
         }
