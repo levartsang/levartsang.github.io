@@ -38,6 +38,7 @@ i {
     color: black;
   }
   #bd-show-data .card:hover {
+    cursor: pointer;
     transform: rotate3d(2, 0, 1, 3deg)
   }
   #bd-show-data img {
@@ -62,10 +63,12 @@ i {
   }
   #bd-show-data .badge {
     background-color: #B37100;
+    cursor: pointer;
   }
   .nav-link:hover {
     background-color: #007bff;
     color: #fff !important;
+    cursor: pointer;
   }
   /*大屏幕时*/
   @media (min-width: 768px) {
