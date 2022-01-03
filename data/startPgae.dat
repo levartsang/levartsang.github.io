@@ -1,0 +1,22 @@
+<h4 class="display-4">版权声明</h4>
+<p class="lead">该文档搬运B站UP主<a href="https://space.bilibili.com/774729/">_碳十二_</a>维护的全网优质课程知识库文档<br>
+原则上和原文档同源，并不会对原文档进行修改，如有侵权，请联系<a href="mailto:levartsang@outlook.com">levartsang@outlook.com</a> 删除
+</p>
+<hr>
+<p>
+<h4>关于如何参与贡献更新数据？</h4>
+<ul>
+    <li>在github上拉取仓库</li>
+    <li>直接使用word打开data路径下的对应的数据文件修改更新，当然，也可以直接使用记事本（其他编辑工具都可以）打开</li>
+    <li>提交贡献数据或代码</li>
+</ul>
+<hr>
+<h4>关于数据文件对应：</h4>
+<ul>
+    <li>data/unicour_data.csv 大学课程数据</li> 
+    <li>data/othcour_data.csv 其他课程数据</li>
+    <li>data/panknowup_data.csv 泛知识up数据</li>
+    <li>data/books_data.csv 书籍推荐数据</li>
+    <li>data/notice_data.dat 公告栏数据（支持html标签）</li>
+</ul>
+</p>

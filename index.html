@@ -1,326 +1,129 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html class="h-100" lang="en">
   <head>
-    <title>全网优质课程知识库文档</title>
+    <title>test model</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/maincss.css">
-
+    
     <!--Gitalk-->
     <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
     <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
+    
     <!--iconfont-->
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_3029721_iidwnvqspgp.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_3029721_keqdmk64vqj.css">
+
+    <link rel="stylesheet" href="css/maincss.css">
   </head>
   <body class="h-100">
-    <div class="container-fluid h-100">
-      <div class="row">
-        <header class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
-          <a class="navbar-brand" href="https://docs.qq.com/sheet/DRU5MWHZCTHFGQnhM" title="访问原文档">全网优质课程知识库文档</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#left-menu" aria-controls="left-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </header>
-      </div>
-      <div class="row" style="height: max-content;">
-        <div class="col-lg-3 col-12 border-right">
-          <div class="container-fluid">
-            <div class="row my-2">
-              <div class="col-12">
-               <div class="card">
-                 <div class="card-header bg-primary text-light" style="font-size: 16px;">
-                  <i class="iconfont">&#xe6f9;</i>公告
-                 </div>
-                 <div class="card-body p-2">
-                   <p class="card-text font-weight-normal" id="notice"></p>
-                 </div>
-               </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <nav class="collapse border rounded" id="left-menu">
-                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#list-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="iconfont">&#xe650;</i>开始页</a>
-                    <a class="nav-link" id="v-pills-unicour-tab" data-toggle="pill" href="#list-unicour" role="tab" aria-controls="v-pills-unicour" aria-selected="false"><i class="iconfont">&#xe605;</i>大学课程<span class="badge badge-light" id="unicour-sum">0</span></a>
-                    <a class="nav-link" id="v-pills-othcour-tab" data-toggle="pill" href="#list-othcour" role="tab" aria-controls="v-pills-othcour" aria-selected="false"><i class="iconfont">&#xe60a;</i>其他课程<span class="badge badge-light" id="othcour-sum">0</span></a>
-                    <a class="nav-link" id="v-pills-panknowup-tab" data-toggle="pill" href="#list-panknowup" role="tab" aria-controls="v-pills-panknowup" aria-selected="false"><i class="iconfont">&#xe600;</i>泛知识UP<span class="badge badge-light" id="panknowup-sum">0</span></a>
-                    <a class="nav-link" id="v-pills-books-tab" data-toggle="pill" href="#list-books" role="tab" aria-controls="v-pills-books" aria-selected="false"><i class="iconfont">&#xe6b5;</i>书籍推荐<span class="badge badge-light" id="books-sum">0</span></a>
-                    <a class="nav-link" id="v-pills-messboard-tab" data-toggle="pill" href="#list-messboard" role="tab" aria-controls="v-pills-messboard" aria-selected="false"><i class="iconfont">&#xe7ef;</i>留言板<span class="badge badge-light" id="messboard-sum">0</span></a>
+      <header class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand text-light ml-3" href="https://docs.qq.com/sheet/DRU5MWHZCTHFGQnhM">全网优质课程知识库文档</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bd-lmenu" aria-controls="bd-lmenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </header>
+      <div class="container-fluid main">
+          <div class="row main-container">
+             <div class="col-md-3 col-12 bd-sidebar">
+                <div class="col-12 bd-notice">
+                  <div class="card" style="height: 160px;">
+                    <div class="card-header bg-primary text-light font-weight-bold">
+                      <i class="iconfont">&#xe6f9;</i>公告
+                    </div>
+                    <div class="card-body" id="notice">
+                        <!--notice area-->
+                    </div>
                   </div>
-                </nav>
-              </div>
+                </div>
+                <div class="col-12 bd-search">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="开始搜索吧..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary bg-primary text-light" type="button">搜索</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 bd-lmenu collapse border pt-2" id="bd-lmenu">
+                  <div class="nav flex-column nav-pills" id="v-pills-tab">
+                    <a class="nav-link" id="notice-menu"><i class="iconfont">&#xe6f9;</i>公告</a>
+                    <a class="nav-link active"><i class="iconfont">&#xe650;</i>开始页</a>
+                    <a class="nav-link"><i class="iconfont">&#xe658;</i>关于</span></a>
+                    <a class="nav-link"><i class="iconfont">&#xe605;</i>大学课程<span class="badge badge-light" id="unicour-sum">0</span></a>
+                    <a class="nav-link"><i class="iconfont">&#xe60a;</i>其他课程<span class="badge badge-light" id="othcour-sum">0</span></a>
+                    <a class="nav-link"><i class="iconfont">&#xe600;</i>泛知识UP<span class="badge badge-light" id="panknowup-sum">0</span></a>
+                    <a class="nav-link"><i class="iconfont">&#xe6b5;</i>书籍推荐<span class="badge badge-light" id="books-sum">0</span></a>
+                    <a class="nav-link"><i class="iconfont">&#xe7ef;</i>留言板<span class="badge badge-light" id="messboard-sum">0</span></a>
+                  </div>
+                </div>
+            </div>
+             <div class="col-md-9 col-12 bd-main py-3">
+                <div class="row bg-mcont">
+
+                  <div class="col-12" id="noticePgae">
+                    <div class="jumbotron p-4 m-0">
+                      <h4 class="display-4">公告信息</h4>
+                      <p class="lead"><!--notice page-->fdfa</p>
+                    </div>
+                  </div>
+
+                  <div class="col-12" id="startPgae">
+                    <div class="jumbotron p-4 m-0">
+                      <!--statpage data-->
+                    </div>
+                  </div>
+
+                  <div class="col-12" id="aboutPage">
+                    <div class="jumbotron p-4 m-0">
+                      <!--aboutpage data-->
+                    </div>
+                  </div>
+
+                  <div class="col-12" id="bd-show-data">
+                    <!--data show area-->
+                  </div>
+                   
+                  <div class="col-12 bd-sum">
+                    <span class="sum-data float-right"><!--data sum--></span>
+                    <nav class="float-left" aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item">
+                          <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" id="curr-page" href="#"><!--current page--></a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+
+                  <div class="col-12" id="commPage">
+                    <!--commPage-->
+                    <div class="card">
+                      <div class="card-body">
+                        <div id="gitalk-container"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
-        </div>
-
-        <!--pane-->
-        <div class="col-lg-9 py-2">
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-              <div class="jumbotron p-4 m-0">
-                <h4 class="display-4">版权声明</h4>
-                <p class="lead">该文档搬运B站UP主<a href="https://space.bilibili.com/774729/">_碳十二_</a>维护的全网优质课程知识库文档<br>
-                  原则上和原文档同源，并不会对原文档进行修改，如有侵权，请联系<a href="mailto:levartsang@outlook.com">levartsang@outlook.com</a> 删除
-                </p>
-          
-                <!--暂时数据-->
-                <hr>
-                <p>
-                  <h4>关于如何参与贡献更新数据？</h4>
-                  <ul>
-                    <li>在github上拉取仓库</li>
-                    <li>直接使用word打开data路径下的对应的数据文件修改更新，当然，也可以直接使用记事本（其他编辑工具都可以）打开</li>
-                    <li>提交贡献数据或代码</li>
-                  </ul>
-                  <hr>
-                  <h4>关于数据文件对应：</h4>
-                  <ul>
-                    <li>data/unicour_data.csv 大学课程数据</li> 
-                    <li>data/othcour_data.csv 其他课程数据</li>
-                    <li>data/panknowup_data.csv 泛知识up数据</li>
-                    <li>data/books_data.csv 书籍推荐数据</li>
-                    <li>data/notice_data.dat 公告栏数据（支持html标签）</li>
-                  </ul>
-                </p>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="list-unicour" role="tabpanel" aria-labelledby="list-unicour-list">
-              <div class="card">
-                <div class="card-header">
-                  <!--过滤-->
-                  <div class="input-group">
-                    <div class="input-group-prepend w-25">
-                      <select class="custom-select" id="unicour-key">
-                        <option selected value="0">推荐人ID</option>
-                        <option value="1">推荐课程名称</option>
-                        <option value="2">授课老师</option>
-                        <option value="3">课程对应专业</option>
-                      </select>
-                    </div>
-                    <input id="unicour-filter" type="text" class="form-control" placeholder="dome功能" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="unicour-butt">搜索</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body pt-0 pb-0">
-                  <table class="table table-hover border-bottom">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">推荐人ID</th>
-                        <th scope="col text-truncate">推荐课程名称</th>
-                        <th scope="col">授课老师</th>
-                        <th scope="col">课程对应专业</th>
-                        <th scope="col">课程所在平台</th>
-                        <th scope="col">推荐语</th>
-                        <th scope="col">推荐日期</th>
-                      </tr>
-                    </thead>
-                    <tbody id="unicour">
-                    </tbody>
-                  </table>
-                  <nav aria-label="Page navigation example ">
-                    <ul class="pagination justify-content-center" id="unicour-paging" item='0'>
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item" >
-                        <a class="page-link" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="list-othcour" role="tabpanel" aria-labelledby="list-othcour-list">
-              <div class="card">
-                <div class="card-header">
-                  <!--过滤-->
-                  <div class="input-group">
-                    <div class="input-group-prepend w-25">
-                      <select class="custom-select" id="othcour-key">
-                        <option selected value="0">推荐人ID</option>
-                        <option value="1">推荐课程名称</option>
-                        <option value="2">授课老师</option>
-                        <option value="3">课程对应专业</option>
-                      </select>
-                    </div>
-                    <input id="othcour-filter" type="text" class="form-control" placeholder="dome功能" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="othcour-butt">搜索</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body pt-0 pb-0">
-                  <table class="table table-hover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">推荐人ID</th>
-                        <th scope="col">推荐课程名称</th>
-                        <th scope="col">博主</th>
-                        <th scope="col">课程所在平台</th>
-                        <th scope="col">推荐语</th>
-                        <th scope="col">推荐日期</th>
-                      </tr>
-                    </thead>
-                    <tbody id="othcour">
-                    </tbody>
-                  </table>
-
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center" id="othcour-paging" item="1">
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="list-panknowup" role="tabpanel" aria-labelledby="list-panknowup-list">
-              <div class="card">
-                <div class="card-header">
-                  <!--过滤-->
-                  <div class="input-group">
-                    <div class="input-group-prepend w-25">
-                      <select class="custom-select" id="panknowup-key">
-                        <option selected value="0">推荐人ID</option>
-                        <option value="1">推荐课程名称</option>
-                        <option value="2">授课老师</option>
-                        <option value="3">课程对应专业</option>
-                      </select>
-                    </div>
-                    <input id="panknowup-filter" type="text" class="form-control" placeholder="dome功能" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="panknowup-butt">搜索</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body pt-0 pb-0">
-                  <table class="table table-hover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">推荐人ID</th>
-                        <th scope="col">推荐博主</th>
-                        <th scope="col">博主涉及领域</th>
-                        <th scope="col">博主所在平台</th>
-                        <th scope="col">推荐理由</th>
-                        <th scope="col">推荐日期</th>
-                      </tr>
-                    </thead>
-                    <tbody id="panknowup">
-                    </tbody>
-                  </table>
-
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center" id="panknowup-paging" item="2">
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="list-books" role="tabpanel" aria-labelledby="list-books-list">
-              <div class="card">
-                <div class="card-header">
-                  <!--过滤-->
-                  <div class="input-group">
-                    <div class="input-group-prepend w-25">
-                      <select class="custom-select" id="books-key">
-                        <option selected value="0">推荐人ID</option>
-                        <option value="1">推荐课程名称</option>
-                        <option value="2">授课老师</option>
-                        <option value="3">课程对应专业</option>
-                      </select>
-                    </div>
-                    <input id="books-filter" type="text" class="form-control" placeholder="dome功能" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="books-butt">搜索</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body pt-0 pb-0">
-                  <table class="table table-hover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">推荐人ID</th>
-                        <th scope="col">推荐书籍</th>
-                        <th scope="col">书籍作者</th>
-                        <th scope="col">推荐理由</th>
-                        <th scope="col">推荐日期</th>
-                      </tr>
-                    </thead>
-                    <tbody id="books">
-                    </tbody>
-                  </table>
-
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center" id="books-paging" item="3">
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="list-messboard" role="tabpanel" aria-labelledby="list-messboard-list">
-              <div class="card">
-                <div class="card-body">
-                  <div id="gitalk-container"></div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
-    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
