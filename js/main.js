@@ -139,7 +139,7 @@
                 $(item.id + '-sum').text(item.data.length - 1)
                 break;
             case commPage:
-                // TODO
+                commPageState(0)
                 break;
         }
     });
