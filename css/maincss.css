@@ -1,4 +1,7 @@
-i {
+  #noticePgae, #aboutPage, #bd-show-data, .bd-sum, #commPage {
+    display: none;
+  }
+  i {
     margin-right: 13px;
   }
   .badge {

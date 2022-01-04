@@ -151,25 +151,20 @@
     // 初始化数据
     leftMeunItems.forEach(item => {
         // 初始化leftmenu显示
+        showCurrPage(1)
         initData(item)
          // 页面数据构造
          switch (item.index) {
             case noticePage:
-                noticePageState(0)
                 $(noticeID).html(item.data)
                 $(item.id + ' .lead').html(item.data)
+                console.log(11)
                 break;
             case startPage:
-                startPageState(1)
-                aboutPageState(0)
-                commPageState(0)
                 $(item.id + ' .jumbotron').html(item.data)
-                showDataPageState(0)
                 break;
             case aboutPage:
-                aboutPageState(0)
                 $(item.id + ' .jumbotron').html(item.data)
-                showDataPageState(0)
                 break;
             case unicourPage:
             case othcourPage:
