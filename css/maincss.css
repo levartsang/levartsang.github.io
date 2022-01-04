@@ -70,6 +70,24 @@ i {
     color: #fff !important;
     cursor: pointer;
   }
+  button.navbar-toggler span {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    width: 0.14em;
+    height: 1.2em;
+    background-color: rgb(90, 90, 90);
+    transition: all 200ms;
+  }
+  button.navbar-toggler span.active:nth-child(1){
+    transform: rotateZ(-45deg);
+  }
+  button.navbar-toggler span.active:nth-child(2){
+    opacity: 0;
+  }
+  button.navbar-toggler span.active:nth-child(3){
+    transform: rotateZ(45deg);
+  }
   /*大屏幕时*/
   @media (min-width: 768px) {
     .badge {

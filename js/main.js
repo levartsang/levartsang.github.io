@@ -109,6 +109,10 @@
         }
     ]
 
+    $('button.navbar-toggler').click(function(){
+        $('button.navbar-toggler span').toggleClass('active')
+    });
+
     $(searchButtID).click(function() {
         const key = 1
         const filter = $(filterID).val()
@@ -157,6 +161,8 @@
                 break;
             case startPage:
                 startPageState(1)
+                aboutPageState(0)
+                commPageState(0)
                 $(item.id + ' .jumbotron').html(item.data)
                 showDataPageState(0)
                 break;
