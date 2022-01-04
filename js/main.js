@@ -157,14 +157,18 @@
          switch (item.index) {
             case noticePage:
                 $(noticeID).html(item.data)
+                $(noticeID).removeClass('loading')
                 $(item.id + ' .lead').html(item.data)
+                $(item.id + ' .lead').removeClass('loading')
                 console.log(11)
                 break;
             case startPage:
                 $(item.id + ' .jumbotron').html(item.data)
+                $(item.id + ' .jumbotron').removeClass('loading')
                 break;
             case aboutPage:
                 $(item.id + ' .jumbotron').html(item.data)
+                $(item.id + ' .jumbotron').removeClass('loading')
                 break;
             case unicourPage:
             case othcourPage:
