@@ -1,6 +1,27 @@
   #noticePgae, #aboutPage, #bd-show-data, .bd-sum, #commPage {
     display: none;
   }
+  .bd-main {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .rmain {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .rcon {
+    flex: 1;
+    flex-shrink: 0;
+   
+  }
+  .mfooter {
+    color: #666;
+    background-color: #F8F7FF;
+    text-align: center;
+    padding: 1em;
+  }
   .loading::before {
     display: inline-block;
     position: absolute;
@@ -141,9 +162,6 @@
     #notice-menu {
       display: none;
     }
-    .bd-main {
-      overflow-y: scroll;
-    }
     .bg-mcont {
       height: 0;
     }
@@ -166,13 +184,15 @@
       max-width: 3.2rem;
     }
     .main-container {
-      align-content: flex-start;
+      flex-direction: column;
+      flex-wrap: nowrap;
     }
     .bd-notice {
       display: none;
     }
     .bd-sidebar {
       border-bottom: 1px solid #eee;
+      flex-basis: auto;
     }
     .nav {
       flex-wrap: nowrap;
@@ -188,7 +208,7 @@
     #notice-menu {
       display: block;
     }
-    .footer {
-      margin-bottom: 40px;
+    .mfooter {
+      padding-bottom: 3em;
     }
   }
