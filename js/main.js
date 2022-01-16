@@ -345,14 +345,13 @@
      */
      function initUnicour(row) {
         $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
-            + '<a href="'+ row[5]  +'"></a>'
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage(row[5]) + '" class="card-img" alt="图片来源网络，侵删除">'
             + '</div>'
             + '<div class="col-md-8">'
             + '<div class="card-body">'
-            + '<h5 class="card-title">' + row[1] + '</h5>'
+            + '<h5 class="card-title"><a href="'+ row[5]  +'">' + row[1] + '</a></h5>'
             + '<p class="card-text">' + row[8] 
             + '<span class="badge badge-pill badge-primary" key="2" data-toggle="tooltip" data-placement="bottom" title="' + row[2] + '">' + row[2] + '</span>'
             + '<span class="badge badge-pill badge-primary" key="3" data-toggle="tooltip" data-placement="bottom" title="' + row[3] + '">' + row[3] + '</span>'
@@ -372,15 +371,14 @@
      * @param {Array<String>} row
      */
     function initOthcour(row) {
-        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
-            + '<a href="'+ row[5]  +'"></a>' 
+        $(showDataContainerID).append('<div class="card mb-3 shadow rounded">' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
             + '</div>'
             + '<div class="col-md-8">'
             + '<div class="card-body">'
-            + '<h5 class="card-title">' + row[1] + '</h5>'
+            + '<h5 class="card-title"><a href="'+ row[5]  +'">' + row[1] + '</a></h5>'
             + '<p class="card-text">' + row[7] 
             + '<span class="badge badge-pill badge-primary" key="2" data-toggle="tooltip" data-placement="bottom" title="' + row[2] + '">' + row[2] + '</span>'
             + '<span class="badge badge-pill badge-primary" key="3" data-toggle="tooltip" data-placement="bottom" title="' + row[3] + '">' + row[3] + '</span>'
@@ -401,14 +399,13 @@
      */
      function initPanknowup(row) {
         $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
-            + '<a href="'+ row[4]  +'"></a>' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
             + '</div>'
             + '<div class="col-md-8">'
             + '<div class="card-body">'
-            + '<h5 class="card-title">' + row[1] + '</h5>'
+            + '<h5 class="card-title"><a href="'+ row[4]  +'">' + row[1] + '</a></h5>'
             + '<p class="card-text">' + row[6] 
             + '<span class="badge badge-pill badge-primary" key="1" data-toggle="tooltip" data-placement="bottom" title="' + row[1] + '">' + row[1] + '</span>'
             + '<span class="badge badge-pill badge-primary" key="2" data-toggle="tooltip" data-placement="bottom" title="' + row[2] + '">' + row[2] + '</span>'
@@ -429,14 +426,13 @@
      */
      function initBooks(row) {
         $(showDataContainerID).append('<div class="card mb-3 shadow rounded">'
-            + '<a href="'+ '#'  +'"></a>' 
             + '<div class="row no-gutters">'
             + '<div class="col-md-4 bg-light">'
             + '<img src="' + getDataPgaeImage() + '" class="card-img" alt="图片来源网络，侵删除">'
             + '</div>'
             + '<div class="col-md-8">'
             + '<div class="card-body">'
-            + '<h5 class="card-title">' + row[1] + '</h5>'
+            + '<h5 class="card-title"><a href="'+ '#'  +'">' + row[1] + '</a></h5>'
             + '<p class="card-text">' + row[4] 
             + '<span class="badge badge-pill badge-primary" key="2" data-toggle="tooltip" data-placement="bottom" title="' + row[2] + '">' + row[2] + '</span>'
             + '</p>'

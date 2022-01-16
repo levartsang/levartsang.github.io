@@ -96,15 +96,22 @@
     transform: rotate3d(2, 0, 1, 3deg)
   }
   #bd-show-data img {
+    object-fit: fill;
     height: 210px;
   }
-  #bd-show-data .card-title {
+  #bd-show-data .card-title a {
     color: #007BFF;
     overflow:hidden;
     text-overflow:ellipsis;
     display:-webkit-box;
     -webkit-line-clamp:1;
     -webkit-box-orient:vertical;
+  }
+  .card-title a:hover,  
+  .card-title a:active  {
+    color: #B37100 !important;
+    margin-left: 10px;
+    transition: all 800ms;
   }
   #bd-show-data .recommend{
     font-size: 0.8rem;
